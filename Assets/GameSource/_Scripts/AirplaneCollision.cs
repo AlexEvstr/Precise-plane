@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class AirplaneCollision : MonoBehaviour
 {
     public AirplaneManager airplaneManager; // Ссылка на AirplaneManager
     public GameManager gameManager;         // Ссылка на GameManager
+    public GameObject _failText;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,7 +17,18 @@ public class AirplaneCollision : MonoBehaviour
         else if (collision.CompareTag("border"))
         {
             airplaneManager.OnAirplaneCollision(collision.tag);
-            gameManager.LoseLife(); // Отнимаем жизнь за столкновение
         }
+        else if (collision.CompareTag("failBorder"))
+        {
+            StartCoroutine(ShowFail());
+            gameManager.LoseLife();
+        }
+    }
+
+    private IEnumerator ShowFail()
+    {
+        _failText.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        _failText.SetActive(false);
     }
 }

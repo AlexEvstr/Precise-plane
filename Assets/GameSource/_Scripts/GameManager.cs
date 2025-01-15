@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,14 @@ public class GameManager : MonoBehaviour
     private int totalCoins;            // Общее количество монет
     private int roundCoins;            // Монеты за текущий раунд
     private int lives = 3;             // Количество жизней
+    [SerializeField] private Text _coinsToAdd;
+    [SerializeField] private GameObject _coinImage;
+
+    private GameWindowManager _gameWindowManager;
 
     private void Start()
     {
+        _gameWindowManager = GetComponent<GameWindowManager>();
         // Загружаем общее количество монет из PlayerPrefs
         totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         UpdateCoinUI();
@@ -23,15 +29,25 @@ public class GameManager : MonoBehaviour
     {
         int coinsToAdd = Random.Range(50, 76); // Рандомное значение от 50 до 75 с шагом 5
         coinsToAdd -= coinsToAdd % 5;          // Гарантируем кратность 5
+        //_coinsToAdd.text = $"+{coinsToAdd}";
+        StartCoroutine(ShowCoinsText(coinsToAdd));
 
         totalCoins += coinsToAdd;
         roundCoins += coinsToAdd;
-
+        
         // Сохраняем общее количество монет в PlayerPrefs
         PlayerPrefs.SetInt("TotalCoins", totalCoins);
 
         // Обновляем текстовые поля
         UpdateCoinUI();
+    }
+
+    private IEnumerator ShowCoinsText(int coinsCount)
+    {
+        _coinImage.SetActive(true);
+        _coinsToAdd.text = $"+{coinsCount}";
+        yield return new WaitForSeconds(1.0f);
+        _coinImage.SetActive(false);
     }
 
     // Обновление UI для монет
@@ -52,7 +68,7 @@ public class GameManager : MonoBehaviour
 
         if (lives == 0)
         {
-            Debug.Log("Game Over");
+            _gameWindowManager.OpenGameOver();
             // Здесь можно добавить вызов метода для отображения окна Game Over
         }
     }
