@@ -7,6 +7,8 @@ public class WindowManager : MonoBehaviour
     public GameObject settingsWindow;   // Окно настроек
     public GameObject shopWindow;       // Окно магазина
     public GameObject achievementsWindow; // Окно ачивок
+    public GameObject _saveBtn;
+    public GameObject _backBtn;
 
     public float animationDuration = 0.5f; // Длительность анимации
 
@@ -24,6 +26,8 @@ public class WindowManager : MonoBehaviour
         {
             menuWindow.SetActive(true); // Открываем меню после анимации
         }));
+        _saveBtn.SetActive(false);
+        _backBtn.SetActive(true);
     }
 
     // Анимация открытия или закрытия окна
