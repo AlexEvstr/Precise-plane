@@ -8,6 +8,7 @@ public class AirplaneCard : MonoBehaviour
     public GameObject priceObject;   // Дочерний объект кнопки: цена
     public GameObject chooseObject;  // Дочерний объект кнопки: "Choose"
     public GameObject chosenObject;  // Дочерний объект кнопки: "Chosen"
+    [SerializeField] private SettingsManager _settingsManager;
 
     private ShopManager shopManager; // Ссылка на ShopManager
 
@@ -24,6 +25,7 @@ public class AirplaneCard : MonoBehaviour
     {
         if (PlayerPrefs.GetInt($"Airplane_{cardIndex}_Purchased", 0) == 1)
         {
+            _settingsManager.PlayClickSound();
             // Если самолет уже куплен, выбираем его
             shopManager.SetAllCardsToChooseState();
             shopManager.SaveChosenAirplane(cardIndex); // Сохраняем выбранный самолет
@@ -36,7 +38,7 @@ public class AirplaneCard : MonoBehaviour
             {
                 shopManager.totalCoins -= ShopManager.airplanePrice;
                 shopManager.UpdateCoinsUI();
-
+                _settingsManager.PlayCashSound();
                 // Сохраняем покупку
                 PlayerPrefs.SetInt($"Airplane_{cardIndex}_Purchased", 1);
                 PlayerPrefs.SetInt("TotalCoins", shopManager.totalCoins);
@@ -53,6 +55,10 @@ public class AirplaneCard : MonoBehaviour
                 {
                     airplaneSkills.UpdateUpgradeButtons();
                 }
+            }
+            else
+            {
+                _settingsManager.PlayDeclibeSound();
             }
         }
     }

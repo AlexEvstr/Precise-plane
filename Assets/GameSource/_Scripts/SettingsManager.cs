@@ -21,6 +21,10 @@ public class SettingsManager : MonoBehaviour
     private const string SoundKey = "sound";
     private const string MusicKey = "music";
     private const string VibroKey = "vibro";
+    private int _isVibro;
+    [SerializeField] private AudioClip _click;
+    [SerializeField] private AudioClip _decline;
+    [SerializeField] private AudioClip _cash;
 
     private SceneTransition _sceneTransition;
 
@@ -28,6 +32,8 @@ public class SettingsManager : MonoBehaviour
     {
         _sceneTransition = GetComponent<SceneTransition>();
         LoadSettings();
+
+        Vibration.Init();
     }
 
     // Методы для звука
@@ -111,7 +117,7 @@ public class SettingsManager : MonoBehaviour
         // Сохраняем вибрацию
         PlayerPrefs.SetInt(VibroKey, 1);
         PlayerPrefs.Save();
-
+        _isVibro = 1;
         // Обновляем UI
         vibroOnButton.transform.GetChild(0).gameObject.SetActive(true);
         vibroOffButton.transform.GetChild(0).gameObject.SetActive(false);
@@ -126,6 +132,7 @@ public class SettingsManager : MonoBehaviour
         // Сохраняем вибрацию
         PlayerPrefs.SetInt(VibroKey, 0);
         PlayerPrefs.Save();
+        _isVibro = 0;
 
         // Обновляем UI
         vibroOnButton.transform.GetChild(0).gameObject.SetActive(false);
@@ -184,5 +191,23 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         _sceneTransition.ChangeScene("MenuScene");
+    }
+
+    public void PlayClickSound()
+    {
+        soundSource.PlayOneShot(_click);
+        if (_isVibro == 1) Vibration.VibratePop();
+    }
+
+    public void PlayDeclibeSound()
+    {
+        soundSource.PlayOneShot(_decline);
+        if (_isVibro == 1) Vibration.VibrateNope();
+    }
+
+    public void PlayCashSound()
+    {
+        soundSource.PlayOneShot(_cash);
+        if (_isVibro == 1) Vibration.VibratePeek();
     }
 }

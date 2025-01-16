@@ -11,7 +11,8 @@ public class AirplaneSkills : MonoBehaviour
     public int[] skillCosts = { 75, 100, 125 }; // Стоимость прокачки для каждого скилла
 
     private const int maxSkillLevel = 10;     // Максимальный уровень скилла
-    private ShopManager shopManager;          // Ссылка на ShopManager для работы с монетами
+    private ShopManager shopManager;
+    [SerializeField] private SettingsManager _settingsManager;
 
     private void Start()
     {
@@ -71,13 +72,14 @@ public class AirplaneSkills : MonoBehaviour
         if (shopManager.totalCoins < skillCosts[skillIndex])
         {
             Debug.Log($"Not enough coins to upgrade skill {skillIndex}.");
+            _settingsManager.PlayDeclibeSound();
             return;
         }
 
         // Списываем монеты и обновляем UI
         shopManager.totalCoins -= skillCosts[skillIndex];
         shopManager.UpdateCoinsUI();
-
+        _settingsManager.PlayCashSound();
         // Увеличиваем уровень скилла
         skillLevels[skillIndex]++;
         SaveSkillLevel(skillIndex);
