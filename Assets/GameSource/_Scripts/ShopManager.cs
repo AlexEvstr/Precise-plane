@@ -19,8 +19,8 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        //totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
-        totalCoins = 5000;
+        totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
+        //totalCoins = 5000;
         UpdateCoinsUI();
 
         // Загружаем индекс выбранного самолета

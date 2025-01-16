@@ -6,6 +6,7 @@ public class AirplaneCollision : MonoBehaviour
     public AirplaneManager airplaneManager; // Ссылка на AirplaneManager
     public GameManager gameManager;         // Ссылка на GameManager
     public GameObject _failText;
+    [SerializeField] private GameAudioCotroller _gameAudioCotroller;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,6 +14,7 @@ public class AirplaneCollision : MonoBehaviour
         {
             airplaneManager.OnAirplaneCollision(collision.tag);
             gameManager.AddCoins(); // Начисляем монеты за попадание
+            _gameAudioCotroller.PlayCashSound();
         }
         else if (collision.CompareTag("border"))
         {
@@ -22,6 +24,7 @@ public class AirplaneCollision : MonoBehaviour
         {
             StartCoroutine(ShowFail());
             gameManager.LoseLife();
+            _gameAudioCotroller.PlayDeclibeSound();
         }
     }
 

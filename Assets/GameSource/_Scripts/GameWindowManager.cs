@@ -6,10 +6,17 @@ public class GameWindowManager : MonoBehaviour
 {
     public float animationDuration = 0.5f; // Длительность анимации
     [SerializeField] private GameObject _gameOverWindow;
+    private GameAudioCotroller _gameAudioCotroller;
+
+    private void Start()
+    {
+        _gameAudioCotroller = GetComponent<GameAudioCotroller>();
+    }
 
     public void OpenGameOver()
     {
         StartCoroutine(ExpandWindow());
+        _gameAudioCotroller.PlayGameOverSound();
     }
 
     private IEnumerator ExpandWindow(float duration = 0.5f)
