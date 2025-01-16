@@ -46,9 +46,17 @@ public class AirplaneCard : MonoBehaviour
                 shopManager.SetAllCardsToChooseState();
                 shopManager.SaveChosenAirplane(cardIndex); // Сохраняем выбранный самолет
                 SetState(false, false, true);
+
+                // Обновляем кнопки прокачки
+                var airplaneSkills = GetComponent<AirplaneSkills>();
+                if (airplaneSkills != null)
+                {
+                    airplaneSkills.UpdateUpgradeButtons();
+                }
             }
         }
     }
+
 
     public void SetState(bool showPrice, bool showChoose, bool showChosen)
     {

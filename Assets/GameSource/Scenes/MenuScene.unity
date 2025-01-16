@@ -11317,6 +11317,7 @@ GameObject:
   - component: {fileID: 958659309}
   - component: {fileID: 958659308}
   - component: {fileID: 958659310}
+  - component: {fileID: 958659311}
   m_Layer: 5
   m_Name: plane_0
   m_TagString: Untagged
@@ -11407,6 +11408,29 @@ MonoBehaviour:
   priceObject: {fileID: 1075627807}
   chooseObject: {fileID: 659785860}
   chosenObject: {fileID: 291806947}
+--- !u!114 &958659311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958659306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0439a013a435545ecb94c8b9eb8f79e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardIndex: 0
+  upgradeButtons:
+  - {fileID: 1339141791}
+  - {fileID: 1203411609}
+  - {fileID: 1452414165}
+  skillChargesObjects:
+  - {fileID: 238922297}
+  - {fileID: 1700052019}
+  - {fileID: 1676910868}
+  skillLevels: 010000000100000001000000
+  skillCosts: 4b000000640000007d000000
 --- !u!1 &970745394
 GameObject:
   m_ObjectHideFlags: 0
@@ -13117,6 +13141,7 @@ GameObject:
   - component: {fileID: 1120403854}
   - component: {fileID: 1120403853}
   - component: {fileID: 1120403855}
+  - component: {fileID: 1120403856}
   m_Layer: 5
   m_Name: plane_1
   m_TagString: Untagged
@@ -13207,6 +13232,29 @@ MonoBehaviour:
   priceObject: {fileID: 1467019684}
   chooseObject: {fileID: 294443553}
   chosenObject: {fileID: 1149685647}
+--- !u!114 &1120403856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120403851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0439a013a435545ecb94c8b9eb8f79e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardIndex: 1
+  upgradeButtons:
+  - {fileID: 1234582129}
+  - {fileID: 593356940}
+  - {fileID: 2123250327}
+  skillChargesObjects:
+  - {fileID: 699159300}
+  - {fileID: 1196158728}
+  - {fileID: 1234452109}
+  skillLevels: 030000000200000001000000
+  skillCosts: 4b000000640000007d000000
 --- !u!1 &1122154949
 GameObject:
   m_ObjectHideFlags: 0
@@ -14719,6 +14767,7 @@ GameObject:
   - component: {fileID: 1262904422}
   - component: {fileID: 1262904421}
   - component: {fileID: 1262904423}
+  - component: {fileID: 1262904424}
   m_Layer: 5
   m_Name: plane_3
   m_TagString: Untagged
@@ -14809,6 +14858,29 @@ MonoBehaviour:
   priceObject: {fileID: 828851269}
   chooseObject: {fileID: 999709300}
   chosenObject: {fileID: 1429342943}
+--- !u!114 &1262904424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262904419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0439a013a435545ecb94c8b9eb8f79e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardIndex: 3
+  upgradeButtons:
+  - {fileID: 546700978}
+  - {fileID: 298737987}
+  - {fileID: 1092936714}
+  skillChargesObjects:
+  - {fileID: 423885142}
+  - {fileID: 144169905}
+  - {fileID: 32220364}
+  skillLevels: 020000000200000007000000
+  skillCosts: 4b000000640000007d000000
 --- !u!1 &1263115368
 GameObject:
   m_ObjectHideFlags: 0
@@ -15735,6 +15807,7 @@ GameObject:
   - component: {fileID: 1345628691}
   - component: {fileID: 1345628690}
   - component: {fileID: 1345628692}
+  - component: {fileID: 1345628693}
   m_Layer: 5
   m_Name: plane_2
   m_TagString: Untagged
@@ -15825,6 +15898,29 @@ MonoBehaviour:
   priceObject: {fileID: 1361360935}
   chooseObject: {fileID: 689439266}
   chosenObject: {fileID: 1103415479}
+--- !u!114 &1345628693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345628688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0439a013a435545ecb94c8b9eb8f79e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardIndex: 2
+  upgradeButtons:
+  - {fileID: 1040953414}
+  - {fileID: 2054640650}
+  - {fileID: 174082183}
+  skillChargesObjects:
+  - {fileID: 860487232}
+  - {fileID: 1511590336}
+  - {fileID: 558627458}
+  skillLevels: 030000000500000004000000
+  skillCosts: 4b000000640000007d000000
 --- !u!1 &1361360935
 GameObject:
   m_ObjectHideFlags: 0
