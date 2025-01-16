@@ -6,7 +6,7 @@ public class TargetMover : MonoBehaviour
     public float xMin = -2.25f;    // Левая граница движения
     public float xMax = 2.25f;     // Правая граница движения
 
-    private int direction = 1;    // Направление движения (1 = вправо, -1 = влево)
+    private float targetX;         // Целевая позиция по X
 
     private void Start()
     {
@@ -21,17 +21,25 @@ public class TargetMover : MonoBehaviour
         {
             speed = 0.1f;
         }
+
+        // Устанавливаем начальную цель движения
+        targetX = xMax;
     }
 
     private void Update()
     {
-        // Двигаем цель в текущем направлении
-        transform.position += Vector3.right * speed * direction * Time.deltaTime;
+        // Линейно перемещаем цель к текущей целевой позиции
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            new Vector3(targetX, transform.position.y, transform.position.z),
+            speed * Time.deltaTime
+        );
 
-        // Проверяем границы и меняем направление
-        if (transform.position.x > xMax || transform.position.x < xMin)
+        // Проверяем, достигнута ли целевая позиция
+        if (Mathf.Abs(transform.position.x - targetX) < 0.01f)
         {
-            direction *= -1; // Меняем направление
+            // Меняем цель на противоположную
+            targetX = targetX == xMax ? xMin : xMax;
         }
     }
 }

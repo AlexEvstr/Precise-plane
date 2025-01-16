@@ -8,8 +8,9 @@ public class AirplaneManager : MonoBehaviour
     public Vector2 resetPosition = new Vector2(0, -3); // Позиция для сброса самолета
 
     private bool moveHorizontally = true; // Флаг для контроля типа движения
-    private Vector2 screenBounds;        // Границы экрана
-    private float airplaneWidth;         // Половина ширины самолета
+    private float targetX;               // Текущая цель по X
+    private float leftBoundary;          // Левая граница
+    private float rightBoundary;         // Правая граница
     [SerializeField] private Sprite[] _planeSprites;
 
     private void Start()
@@ -26,8 +27,14 @@ public class AirplaneManager : MonoBehaviour
         verticalSpeed += verticalSpeedLevel * 0.1f;
 
         // Вычисляем границы экрана
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-        airplaneWidth = airplane.GetComponent<SpriteRenderer>().bounds.extents.x;
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        float airplaneWidth = airplane.GetComponent<SpriteRenderer>().bounds.extents.x;
+
+        leftBoundary = -screenBounds.x + airplaneWidth;
+        rightBoundary = screenBounds.x - airplaneWidth;
+
+        // Устанавливаем начальную цель
+        targetX = rightBoundary;
     }
 
     private void Update()
@@ -46,12 +53,18 @@ public class AirplaneManager : MonoBehaviour
 
     private void MoveHorizontally()
     {
-        airplane.transform.position += Vector3.right * horizontalSpeed * Time.deltaTime;
+        // Линейно перемещаем самолет к текущей цели
+        airplane.transform.position = Vector3.MoveTowards(
+            airplane.transform.position,
+            new Vector3(targetX, airplane.transform.position.y, airplane.transform.position.z),
+            horizontalSpeed * Time.deltaTime
+        );
 
-        // Проверяем границы экрана
-        if (airplane.transform.position.x >= 2 || airplane.transform.position.x <= -2)
+        // Проверяем, достигнута ли цель
+        if (Mathf.Abs(airplane.transform.position.x - targetX) < 0.01f)
         {
-            horizontalSpeed *= -1; // Меняем направление
+            // Меняем цель на противоположную
+            targetX = targetX == rightBoundary ? leftBoundary : rightBoundary;
         }
     }
 
@@ -74,6 +87,9 @@ public class AirplaneManager : MonoBehaviour
 
             // Возобновляем движение влево-вправо
             moveHorizontally = true;
+
+            // Сбрасываем цель движения
+            targetX = rightBoundary;
         }
     }
 }
