@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,15 @@ public class GameManager : MonoBehaviour
     private int lives = 3;             // Количество жизней
     [SerializeField] private Text _coinsToAdd;
     [SerializeField] private GameObject _coinImage;
+    private int _totalHitsCount;
+    private int _totalGamesCount;
 
     private GameWindowManager _gameWindowManager;
 
     private void Start()
     {
+        _totalHitsCount = PlayerPrefs.GetInt("TotalHits", 0);
+        _totalGamesCount = PlayerPrefs.GetInt("TotalGames", 0);
         _gameWindowManager = GetComponent<GameWindowManager>();
         // Загружаем общее количество монет из PlayerPrefs
         totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
@@ -27,7 +32,8 @@ public class GameManager : MonoBehaviour
     // Начисление монет
     public void AddCoins()
     {
-        int coinsToAdd = Random.Range(50, 76); // Рандомное значение от 50 до 75 с шагом 5
+        IncreaseAndHits();
+        int coinsToAdd = UnityEngine.Random.Range(50, 76); // Рандомное значение от 50 до 75 с шагом 5
         coinsToAdd -= coinsToAdd % 5;          // Гарантируем кратность 5
         //_coinsToAdd.text = $"+{coinsToAdd}";
         StartCoroutine(ShowCoinsText(coinsToAdd));
@@ -40,6 +46,29 @@ public class GameManager : MonoBehaviour
 
         // Обновляем текстовые поля
         UpdateCoinUI();
+    }
+
+    private void IncreaseAndHits()
+    {
+        string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
+        
+        _totalHitsCount++;
+        PlayerPrefs.SetInt("TotalHits", _totalHitsCount);
+        if (_totalHitsCount >= 100)
+        {
+            PlayerPrefs.SetInt("Achieve_3", 1);
+            PlayerPrefs.SetString("DateForAchieve_2", currentDate);
+        }
+        else if (_totalHitsCount >= 50)
+        {
+            PlayerPrefs.SetInt("Achieve_2", 1);
+            PlayerPrefs.SetString("DateForAchieve_1", currentDate);
+        }
+        else if (_totalHitsCount >= 10)
+        {
+            PlayerPrefs.SetInt("Achieve_1", 1);
+            PlayerPrefs.SetString("DateForAchieve_0", currentDate);
+        }
     }
 
     private IEnumerator ShowCoinsText(int coinsCount)
@@ -69,7 +98,30 @@ public class GameManager : MonoBehaviour
         if (lives == 0)
         {
             _gameWindowManager.OpenGameOver();
-            // Здесь можно добавить вызов метода для отображения окна Game Over
+            IncreaseAndCheckGames();
+        }
+    }
+
+    private void IncreaseAndCheckGames()
+    {
+        string currentDate = DateTime.Now.ToString("dd.MM.yyyy");
+
+        _totalGamesCount++;
+        PlayerPrefs.SetInt("TotalGames", _totalGamesCount);
+        if (_totalGamesCount >= 100)
+        {
+            PlayerPrefs.SetInt("Achieve_6", 1);
+            PlayerPrefs.SetString("DateForAchieve_5", currentDate);
+        }
+        else if (_totalGamesCount >= 50)
+        {
+            PlayerPrefs.SetInt("Achieve_5", 1);
+            PlayerPrefs.SetString("DateForAchieve_4", currentDate);
+        }
+        else if (_totalGamesCount >= 10)
+        {
+            PlayerPrefs.SetInt("Achieve_4", 1);
+            PlayerPrefs.SetString("DateForAchieve_3", currentDate);
         }
     }
 

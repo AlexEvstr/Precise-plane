@@ -586,7 +586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7815f2ab8a74983bcff6431e7d8181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   xMin: -2.5
   xMax: 2.5
 --- !u!1 &312935193
@@ -1889,8 +1888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airplane: {fileID: 649368859}
-  horizontalSpeed: 2
-  verticalSpeed: 5
   resetPosition: {x: 0, y: -3}
   _planeSprites:
   - {fileID: 21300000, guid: 413594b75deeb4a2fa6a170c48d92f80, type: 3}

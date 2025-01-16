@@ -49,7 +49,7 @@ public class AirplaneManager : MonoBehaviour
         airplane.transform.position += Vector3.right * horizontalSpeed * Time.deltaTime;
 
         // Проверяем границы экрана
-        if (airplane.transform.position.x > screenBounds.x - airplaneWidth || airplane.transform.position.x < -screenBounds.x + airplaneWidth)
+        if (airplane.transform.position.x >= 2 || airplane.transform.position.x <= -2)
         {
             horizontalSpeed *= -1; // Меняем направление
         }

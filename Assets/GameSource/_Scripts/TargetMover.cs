@@ -29,7 +29,7 @@ public class TargetMover : MonoBehaviour
         transform.position += Vector3.right * speed * direction * Time.deltaTime;
 
         // Проверяем границы и меняем направление
-        if (transform.position.x >= xMax || transform.position.x <= xMin)
+        if (transform.position.x > xMax || transform.position.x < xMin)
         {
             direction *= -1; // Меняем направление
         }
