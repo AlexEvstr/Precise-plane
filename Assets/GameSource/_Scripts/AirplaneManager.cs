@@ -10,14 +10,11 @@ public class AirplaneManager : MonoBehaviour
     private bool moveHorizontally = true; // Флаг для контроля типа движения
     private Vector2 screenBounds;        // Границы экрана
     private float airplaneWidth;         // Половина ширины самолета
+    [SerializeField] private Sprite[] _planeSprites;
 
     private void Start()
     {
-        if (airplane == null)
-        {
-            Debug.LogError("Самолет не назначен в AirplaneManager!");
-            return;
-        }
+        airplane.GetComponent<SpriteRenderer>().sprite = _planeSprites[PlayerPrefs.GetInt("ChosenAirplane", 0)];
 
         // Вычисляем границы экрана
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));

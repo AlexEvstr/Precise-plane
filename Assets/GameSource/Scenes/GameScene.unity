@@ -506,7 +506,7 @@ Transform:
   m_GameObject: {fileID: 308875933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1892,6 +1892,11 @@ MonoBehaviour:
   horizontalSpeed: 2
   verticalSpeed: 5
   resetPosition: {x: 0, y: -3}
+  _planeSprites:
+  - {fileID: 21300000, guid: 413594b75deeb4a2fa6a170c48d92f80, type: 3}
+  - {fileID: 21300000, guid: 54951d475dded49f999c3abac4f0d2af, type: 3}
+  - {fileID: 21300000, guid: 5f58f60e2a1c14b8eac5f5f37bdacb47, type: 3}
+  - {fileID: 21300000, guid: 5cb1251f51b084df8925a5025f15a2e9, type: 3}
 --- !u!4 &1408578802
 Transform:
   m_ObjectHideFlags: 0

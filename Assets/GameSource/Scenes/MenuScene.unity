@@ -15720,6 +15720,12 @@ MonoBehaviour:
   - {fileID: 1345628688}
   - {fileID: 1262904419}
   totalCoins: 0
+  _planeImage: {fileID: 1370884389}
+  _spritesPlanes:
+  - {fileID: 21300000, guid: 413594b75deeb4a2fa6a170c48d92f80, type: 3}
+  - {fileID: 21300000, guid: 54951d475dded49f999c3abac4f0d2af, type: 3}
+  - {fileID: 21300000, guid: 5f58f60e2a1c14b8eac5f5f37bdacb47, type: 3}
+  - {fileID: 21300000, guid: 5cb1251f51b084df8925a5025f15a2e9, type: 3}
 --- !u!1 &1342334220
 GameObject:
   m_ObjectHideFlags: 0

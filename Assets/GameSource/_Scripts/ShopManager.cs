@@ -14,6 +14,8 @@ public class ShopManager : MonoBehaviour
     private int chosenCardIndex = 0;  // Индекс выбранного самолета
 
     public const int airplanePrice = 1400; // Цена каждого самолета
+    [SerializeField] private Image _planeImage;
+    [SerializeField] private Sprite[] _spritesPlanes;
 
     private void Start()
     {
@@ -33,6 +35,8 @@ public class ShopManager : MonoBehaviour
 
         // Устанавливаем начальное отображение карточек
         UpdateCardDisplay();
+
+        _planeImage.sprite = _spritesPlanes[chosenCardIndex];
     }
 
     private void InitializeCards()
@@ -107,5 +111,6 @@ public class ShopManager : MonoBehaviour
         chosenCardIndex = cardIndex;
         PlayerPrefs.SetInt("ChosenAirplane", chosenCardIndex);
         PlayerPrefs.Save();
+        _planeImage.sprite = _spritesPlanes[cardIndex];
     }
 }
