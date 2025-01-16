@@ -11,13 +11,17 @@ public class ShopManager : MonoBehaviour
 
     public int totalCoins;          // Количество монет игрока
     private int currentCardIndex = 0; // Индекс текущей карточки
-    public const int airplanePrice = 1400;
+    private int chosenCardIndex = 0;  // Индекс выбранного самолета
+
+    public const int airplanePrice = 1400; // Цена каждого самолета
 
     private void Start()
     {
-        // Загружаем монеты из PlayerPrefs
         totalCoins = PlayerPrefs.GetInt("TotalCoins", 0);
         UpdateCoinsUI();
+
+        // Загружаем индекс выбранного самолета
+        chosenCardIndex = PlayerPrefs.GetInt("ChosenAirplane", 0);
 
         // Устанавливаем начальное состояние карточек
         InitializeCards();
@@ -36,23 +40,26 @@ public class ShopManager : MonoBehaviour
         {
             var cardScript = airplaneCards[i].GetComponent<AirplaneCard>();
 
-            if (i == 0)
+            if (i == 0 && PlayerPrefs.GetInt($"Airplane_{i}_Purchased", 0) == 0)
             {
-                // Первый самолет всегда куплен и выбран
+                // Первый самолет всегда куплен и выбран, если его состояние не сохранено
                 PlayerPrefs.SetInt($"Airplane_{i}_Purchased", 1);
+            }
+
+            if (i == chosenCardIndex)
+            {
+                // Если самолет выбран
                 cardScript.SetState(false, false, true); // Выбран
+            }
+            else if (PlayerPrefs.GetInt($"Airplane_{i}_Purchased", 0) == 1)
+            {
+                // Если самолет куплен, но не выбран
+                cardScript.SetState(false, true, false);
             }
             else
             {
-                // Остальные самолеты не куплены
-                if (PlayerPrefs.GetInt($"Airplane_{i}_Purchased", 0) == 1)
-                {
-                    cardScript.SetState(false, true, false); // Куплен, но не выбран
-                }
-                else
-                {
-                    cardScript.SetState(true, false, false); // Не куплен
-                }
+                // Если самолет не куплен
+                cardScript.SetState(true, false, false);
             }
         }
     }
@@ -62,21 +69,18 @@ public class ShopManager : MonoBehaviour
         coinsText.text = totalCoins.ToString();
     }
 
-    // Метод для левой стрелки
     public void OnLeftArrowClick()
     {
         currentCardIndex = (currentCardIndex == 0) ? airplaneCards.Length - 1 : currentCardIndex - 1;
         UpdateCardDisplay();
     }
 
-    // Метод для правой стрелки
     public void OnRightArrowClick()
     {
         currentCardIndex = (currentCardIndex == airplaneCards.Length - 1) ? 0 : currentCardIndex + 1;
         UpdateCardDisplay();
     }
 
-    // Обновление отображения карточек
     private void UpdateCardDisplay()
     {
         for (int i = 0; i < airplaneCards.Length; i++)
@@ -95,5 +99,12 @@ public class ShopManager : MonoBehaviour
                 cardScript.SetState(false, true, false); // Куплен, но не выбран
             }
         }
+    }
+
+    public void SaveChosenAirplane(int cardIndex)
+    {
+        chosenCardIndex = cardIndex;
+        PlayerPrefs.SetInt("ChosenAirplane", chosenCardIndex);
+        PlayerPrefs.Save();
     }
 }

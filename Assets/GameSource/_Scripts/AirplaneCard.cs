@@ -26,7 +26,8 @@ public class AirplaneCard : MonoBehaviour
         {
             // Если самолет уже куплен, выбираем его
             shopManager.SetAllCardsToChooseState();
-            SetState(false, false, true); // Установить состояние "Chosen"
+            shopManager.SaveChosenAirplane(cardIndex); // Сохраняем выбранный самолет
+            SetState(false, false, true);             // Установить состояние "Chosen"
         }
         else
         {
@@ -43,6 +44,7 @@ public class AirplaneCard : MonoBehaviour
 
                 // Выбираем самолет
                 shopManager.SetAllCardsToChooseState();
+                shopManager.SaveChosenAirplane(cardIndex); // Сохраняем выбранный самолет
                 SetState(false, false, true);
             }
         }
